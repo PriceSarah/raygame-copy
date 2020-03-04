@@ -123,7 +123,7 @@ void BinaryTree::draw(TreeNode * selected)
 bool BinaryTree::findNode(int a_nSearchValue, TreeNode ** ppOutNode, TreeNode ** ppOutParent)
 {
 	
-	*ppOutNode = m_pRoot;
+	*ppOutNode = m_pRoot;//
 	*ppOutParent = m_pRoot;
 
 	if (a_nSearchValue < (*ppOutNode)->getData())
