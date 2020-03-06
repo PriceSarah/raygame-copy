@@ -86,32 +86,92 @@ void BinaryTree::insert(int a_nValue)
 
 void BinaryTree::remove(int a_nValue)
 {
-	/*find the value in the tree, obtaining a pointer to the node and its parent
-		If the current node has a right branch, then
-		find the minimum value in the right branch by iterating down the left branch of the
-		current node’s right child until there are no more left branch nodes
-		copy the value from this minimum node to the current node
-		find the minimum node’s parent node(the parent of the node you are deleting)
-		if you are deleting the parent’s left node
-			set this left child of the parent to the right child of the minimum
-			node
-			if you are deleting the parent’s right node
-				set the right child of the parent to the minimum node’s right child
-				If the current node has no right branch
-				if we are deleting the parent’s left child, set the left child of the parent to the left
-					child of the current node
-					If we are deleting the parent’s right child, set the right child of the parent to the left
-					child of the current node
-					If we are deleting the root, the root becomes the left child of the current node*/
+	TreeNode* currentNode = nullptr;
+	TreeNode* currentParent = nullptr;
 
+	//Find the value in the tree, obtaining a pointer to the node and its parent
+	findNode(a_nValue, &currentNode, &currentParent);
+	//Return if node is not found
+	if (currentNode == nullptr)
+	{
+		return;
+	}
 
+	//If the current node has a right branch
+	if (currentNode->hasRight())
+	{
+		/*Find the minimum value in the right branch by iterating down the left branch of the current node's right child
+		until there are no more left branch nodes and keep track of the minimum node's parent*/
 
+		TreeNode* minNode;
+		minNode = currentNode->getRight();
+
+		while (minNode != nullptr)
+		{
+			currentParent = minNode;
+			minNode = minNode->getLeft();
+
+		}
+
+		//Copy the value from this minimum node to the current node
+		currentNode->setData(minNode->getData());
+
+		//If we are deleting the parent's left node
+		if (minNode == currentParent->getLeft())
+		{
+			//Set the left child of the parent to the right child of the minimum node
+			currentParent->setLeft(minNode->getRight());
+		}
+
+		//If we are deleting the parent's right node
+		if (minNode == currentParent->getRight())
+		{
+			//Set the right child of the parent to the right child of the minimum node
+			currentParent->setRight(minNode->getRight());
+		}
+			
+		//If the current node has no right branch
+		if (!currentNode->hasRight())
+		{
+			//If we are deleting the parent's left child
+			if (minNode == currentParent->getLeft())
+			{
+				//Set the left child of the parent to the left child of the current node
+				currentParent->setLeft(minNode->getLeft());
+			}
+					
+		}
+
+		//If we are deleting the parent's left child
+		if (minNode == currentParent->getLeft())
+		{
+			//Set the left child of the parent to the left child of the current node
+			currentParent->setLeft(minNode->getLeft());
+		}
+			
+		//If we are deleting the parent's right child
+		if (minNode == currentParent->getRight())
+		{
+			//Set the right child of the parent to the left child of the current node
+			currentParent->setRight(minNode->getLeft());
+		}
+
+		//If we are deleting the root
+		if (minNode->getData() == currentParent->getData())
+		{
+			//The root becomes the left child of the current node
+			currentParent->setData(minNode->getLeft());
+		}
+	}
 
 }
 
-TreeNode * BinaryTree::find(int a_nValue)
+TreeNode* BinaryTree::find(int a_nValue)
 {
-	return nullptr;
+	TreeNode* currentNode = nullptr;
+	TreeNode* currentParent = nullptr;
+	findNode(a_nValue, &currentNode, &currentParent);
+	return currentNode;
 }
 
 
@@ -123,29 +183,34 @@ void BinaryTree::draw(TreeNode * selected)
 bool BinaryTree::findNode(int a_nSearchValue, TreeNode ** ppOutNode, TreeNode ** ppOutParent)
 {
 	
-	*ppOutNode = m_pRoot;//
-	*ppOutParent = m_pRoot;
+	TreeNode* currentNode = m_pRoot;
+	TreeNode* currentParent = nullptr;
 
-	if (a_nSearchValue < (*ppOutNode)->getData())
+	
+	while (currentNode != nullptr)
 	{
-		//Set the current node to the left
-		*ppOutParent = *ppOutNode;
-		*ppOutNode = (*ppOutParent)->getLeft();
+		if (a_nSearchValue < currentNode->getData())
+		{
+			//Set the current node to the left
+			currentParent = currentNode;
+			currentNode = currentParent->getLeft();
+		}
+		//If the value to be inserted is greater than the value in the current node
+		else if (a_nSearchValue > currentNode->getData())
+		{
+			//Set the current node to the right
+			currentParent = currentNode;
+			currentNode = currentParent->getRight();
+		}
+		//If the value to be inserted is equel the value in the current node
+		else if (a_nSearchValue == currentNode->getData())
+		{
+			//Return the current node and its parent
+			*ppOutNode = currentNode;
+			*ppOutParent = currentParent;
+			return true;
+		}
 	}
-	//If the value to be inserted is greater than the value in the current node
-	else if (a_nSearchValue > (*ppOutParent)->getData())
-	{
-		//Set the current node to the right
-		*ppOutParent = *ppOutNode;
-		*ppOutNode = (*ppOutParent)->getRight();
-	}
-	//If the value to be inserted is equel the value in the current node
-	else if (a_nSearchValue == (*ppOutNode)->getData())
-	{
-		//Return the current node and its parent
-		return true;
-	}
-
 	return false;
 }
 
