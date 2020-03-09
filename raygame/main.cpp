@@ -28,23 +28,20 @@ int main()
 	TreeNode* selected;
 	
 
-	tree.insert(790);
-	tree.insert(7);
-	tree.insert(1);
-
-	tree.insert(13);
-	tree.insert(19);
+	
+	tree.insert(7);//problem (crashes)
+	tree.insert(1);//problem (doubles numbers)
+	tree.insert(19);//problem (doubles numbers)
 	tree.insert(39);
 	tree.insert(28);
 	tree.insert(2);
 	tree.insert(-13);
 	tree.insert(14);
-	tree.insert(15);
-	tree.insert(12);
+	tree.insert(13);
 
 	selected = tree.find(2);
+	tree.remove(7);
 
-	
 
 
 	//--------------------------------------------------------------------------------------
