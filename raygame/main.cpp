@@ -29,14 +29,15 @@ int main()
 	
 
 	
-	tree.insert(7);//problem (crashes)
-	tree.insert(1);//problem (doubles numbers)
-	tree.insert(19);//problem (doubles numbers)
-	tree.insert(39);
+	tree.insert(7);
+	tree.insert(1);
+	tree.insert(19);
+	tree.insert(39);//we lose 28
 	tree.insert(28);
 	tree.insert(2);
+	tree.insert(3);
 	tree.insert(-13);
-	tree.insert(14);
+	tree.insert(14);//we lose 13
 	tree.insert(13);
 
 	selected = tree.find(2);

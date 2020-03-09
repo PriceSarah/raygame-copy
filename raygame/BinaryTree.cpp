@@ -105,6 +105,8 @@ void BinaryTree::remove(int a_nValue)
 
 		TreeNode* minNode;
 		minNode = currentNode->getRight();
+		currentParent = currentNode;
+
 
 		while (minNode->hasLeft())
 		{
@@ -121,7 +123,7 @@ void BinaryTree::remove(int a_nValue)
 		{
 			//Set the left child of the parent to the right child of the minimum node
 			currentParent->setLeft(minNode->getRight());
-			remove(currentNode->getData());
+			delete minNode;
 		}
 
 		//If we are deleting the parent's right node
@@ -129,7 +131,7 @@ void BinaryTree::remove(int a_nValue)
 		{
 			//Set the right child of the parent to the right child of the minimum node
 			currentParent->setRight(minNode->getRight());
-			remove(currentNode->getData());
+			delete minNode;
 		}
 	}
 	//If the current node has no right branch
@@ -140,7 +142,7 @@ void BinaryTree::remove(int a_nValue)
 		{
 			//Set the left child of the parent to the left child of the current node
 			currentParent->setLeft(currentNode->getLeft());
-			remove(currentNode->getData());
+			delete currentNode;
 		}			
 			
 		//If we are deleting the parent's right child
@@ -148,7 +150,7 @@ void BinaryTree::remove(int a_nValue)
 		{
 			//Set the right child of the parent to the left child of the current node
 			currentParent->setRight(currentNode->getLeft());
-			remove(currentNode->getData());
+			delete currentNode;
 		}
 
 		//If we are deleting the root
