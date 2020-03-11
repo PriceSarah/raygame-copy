@@ -24,7 +24,5 @@ private:
 
 	//root node of the tree
 	TreeNode* m_pRoot;
-
-	
 };
 
