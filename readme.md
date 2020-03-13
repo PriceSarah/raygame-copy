@@ -1,37 +1,243 @@
-# raygame - sample project
+Sarah Price
+s198041
+Assessment 4- Binary Tree
+Binary Tree Documentation
 
-This is a sample C++ project setup with [raylib][raylib] for Visual Studio 2017.
-Raylib is a simple game programming framework that is designed to be friendly to
-beginners. It is created by [Ramon Santamaria (@raysan5)][raysan].
 
-It is primarily intended for use by students in the Game Programming course at
-the Seattle Campus of the Academy of Interactive Entertainment.
+Description: create a binary tree that can add, remove, and selsct nodes
 
-[raylib]:https://github.com/raysan5/raylib
-[raysan]:https://github.com/raysan5
+File: Node.h
 
-## Building
+   Description- crate a node
 
-This project supports by **Visual Studio 2017** or newer.
+     Attributes:
+     
+         -Name: next
+         Description: goes to the next node
+         Type: Node<T>*
+         Visibility: public
+         
+          -Name: Previous
+         Description: goes to the Previous node
+         Type: Node<T>*
+         Visibility: public
+         
+     
+File: List.h
 
-Clone the repository and open the solution in Visual Studio. Both the solution
-and project should already be configured and ready to start working with. To
-test this, build and run the provided sample project.
+ Description: holds data
 
-![A screenshot of the included sample project](.github/raygame.png)
+     Attributes:
+     
+         -Name: mCount
+         Description: used to keep tract of posistion in the list
+         Type: int
+         Visibility: protected
+        
+         -Name: First
+         Description: the first spot in the list
+         Type: Node<T>*
+         Visibility: protected
+         
+         -Name: insertFirst
+         Description: adds a node to the beginning of the list
+         Type: virtual void
+         Visibility: public
+         
+         -Name: insertLast
+         Description: adds a node to the end of the list
+         Type: virtual void
+         Visibility: public
+         
+     Operations:
+         
+         -Name: isListEmpty
+         Description: checks to see if list is empty
+         Type: bool
+         Visibility: public
+         
+         -Name: front
+         Description: returns the info in the first spot of the list
+         Type: T
+         Visibility: public
+         
+         -Name: List
+         Description: default constructor
+         Type: constructor
+         Visibility: public
+         
+         -Name: ~List
+         Description: default deconstructor
+         Type: deconstructor
+         Visibility: public
+         
+File: TreeNode.h
 
-The sample project that is provided is the [basic window example][basicexample]
-from raylib. Further examples can be found in its [repository][rayexample] or
-on the [website][rayexamplesite].
+ Description: pieces of data that is put into the tree
 
-You can review the [cheatsheet][raycheat] for the full range of functions made
-available through raylib.
+     Attributes:
+     
+         -Name: m_value
+         Description: keeps track of the value
+         Type: int
+         Visibility: private
+         
+         -Name: m_left
+         Description: the node that is on the left
+         Type: TreeNode*
+         Visibility: private
+         
+         -Name: m_right
+         Description: the node that is on the right
+         Type: Node<T> *
+         Visibility: public
+         
+     Operations:
+         
+         -Name: hasLeft
+         Description: checks to see if there is a left node
+         Type: bool
+         Visibility: public
+         
+         -Name: hasRight
+         Description: checks to see if there is a right node
+         Type: bool
+         Visibility: public
+         
+         -Name: getData
+         Description: gets the data stored in a node
+         Type: int
+         Visibility: public
+         
+         -Name: getRight
+         Description: gets the data stored in the right node
+         Type: TreeNode*
+         Visibility: public
+         
+         -Name: getLeft
+         Description: gets the data stored in the left node
+         Type: TreeNode*
+         Visibility: public
+         
+         -Name: setData
+         Description: sets the data stored in a node
+         Type: void
+         Visibility: public
+         
+         -Name: setRight
+         Description: sets the data stored in the right node
+         Type: TreeNode*
+         Visibility: public
+         
+         -Name: setLeft
+         Description: sets the data stored in the left node
+         Type: TreeNode*
+         Visibility: public
+         
+         -Name: draw
+         Description: draws the tree nodes
+         Type: void
+         Visibility: public
+         
+         -Name: Node
+         Description: default deconstructor that takes an int
+         Type: deconstructor
+         Visibility: public
+         
+         -Name: ~Node
+         Description: default deconstructor
+         Type: deconstructor
+         Visibility: public
+         
+File: UnorderedList.h
 
-[basicexample]:https://github.com/raysan5/raylib/blob/master/examples/core/core_basic_window.cpp
-[rayexample]:https://github.com/raysan5/raylib/tree/master/examples
-[rayexamplesite]:https://www.raylib.com/examples.html
-[raycheat]:https://www.raylib.com/cheatsheet/cheatsheet.html
+ Description: list that is not ordered
+         
+     Operations:
+         
+         -Name: insertFirst
+         Description: adds a node to the beginning of the list
+         Type: void
+         Visibility: public
+         
+         -Name: insertLast
+         Description: adds a node to the end of the list
+         Type: void
+         Visibility: public
+         
+         -Name: deleteNode
+         Description: deletes a node
+         Type: void
+         Visibility: public
+         
+File: BinaryTree.h
 
+ Description: creates the binary tree itself
+
+     Attributes:
+     
+         -Name: m_pRoot
+         Description: the roots data
+         Type: TreeNode*
+         Visibility: private
+         
+     Operations:
+         
+         -Name: isEmpty
+         Description: checks if the tree is empty
+         Type: bool
+         Visibility: public
+         
+         -Name: insert
+         Description: inserts a node
+         Type: void
+         Visibility: public
+         
+         -Name: remove
+         Description: removes a node
+         Type: void
+         Visibility: public
+         
+         -Name: find
+         Description: finds a node
+         Type: TreeNode*
+         Visibility: public
+         
+         -Name: draw
+         Description: draws the selected node
+         Type: void
+         Visibility: public
+         
+         -Name: findNode
+         Description: finds the specific node
+         Type: bool
+         Visibility: private
+         
+         -Name: draw
+         Description: draws the Binary Tree
+         Type: void
+         Visibility: private
+         
+         -Name: BinaryTree
+         Description: default deconstructor that takes an int
+         Type: deconstructor
+         Visibility: public
+         
+         -Name: ~BinaryTree
+         Description: default deconstructor
+         Type: deconstructor
+         Visibility: public
+         
+File: main.cpp
+
+ Description: runs on start up; where key functions are called
+
+     Operations:
+         
+         -Name: main
+         Description: runs on start up
+         Type: int
+         Visibility: private
 ## License
 
 MIT License - Copyright (c) 2018 Academy of Interactive Entertainment
